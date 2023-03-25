@@ -1,0 +1,52 @@
+---
+title: "R Markdown Presentation & Plotly"
+author: "Miguel Santana"
+date: "25-03-2023"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plot 1 (`rnorm` generated)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(plotly)
+
+trace_0 <- rnorm(100, mean = 5)
+trace_1 <- rnorm(100, mean = 0)
+trace_2 <- rnorm(100, mean = -5)
+x <- c(1:100)
+
+data <- data.frame(x, trace_0, trace_1, trace_2)
+
+fig <- plot_ly(data, x = ~x)
+fig <- fig %>% add_trace(y = ~trace_0, name = 'trace 0',mode = 'lines')
+fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
+fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
+```
+
+## Plot 1 (`rnorm` generated) - Output
+
+```{r message=FALSE, warning=FALSE}
+fig
+```
+
+## Plot 2 (based on the `diamonds` dataset)
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+d <- diamonds[sample(nrow(diamonds), 1000), ]
+
+fig <- plot_ly(
+  d, x = ~carat, y = ~price,
+  color = ~carat, size = ~carat
+)
+```
+
+## Plot 2 (based on the `diamonds` dataset) - Output
+
+```{r message=FALSE, warning=FALSE}
+fig
+```
+

@@ -1,0 +1,28 @@
+---
+title: "R Markdown and Leaflet"
+author: "Miguel Santana"
+date: "25-03-2023"
+output: html_document
+---
+
+## R Markdown
+
+This is the submission for the Week 2 of Developing Data Products from Coursera and John Hopkins University.
+
+```{r}
+library(leaflet)
+
+my_map <- leaflet() %>% addTiles()
+
+jhu_icon <- makeIcon(iconUrl="https://brand.jhu.edu/assets/uploads/sites/5/2014/06/university.shield.small_.blue_.png",
+                     iconWidth=31*215/230, iconHeight=31,
+                     iconAnchorX=31*215/230/2, iconAnchorY=16)
+my_map <- my_map %>% addMarkers(lat=39.33003400516011, lng=-76.62043188902076, popup="John Hopkins University", icon=jhu_icon)
+
+coursera_icon <- makeIcon(iconUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ57DguzirzLyqNpq-NwHM1ZcwzQE8Dkvk2_HH9UUQg&s",
+                          iconWidth=31*215/230, iconHeight=31,
+                          iconAnchorX=31*215/230/2, iconAnchorY=16)
+my_map <- my_map %>% addMarkers(lat=37.386689550263824, lng=-122.06092973551159, popup="Coursera HQ", icon=coursera_icon)
+
+my_map
+```
